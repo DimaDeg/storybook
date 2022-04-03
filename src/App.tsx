@@ -2,22 +2,14 @@ import React, {useState} from 'react';
 import './App.css';
 import {Rating, RatingValueType} from "./components/Rating/Rating";
 import {Accordion} from "./components/Accordion/Accordion";
+import {ExampleUseMemo} from "./components/Select/UseMemoExample";
 
 function App() {
 
-    let [ratingValue, setRatingValue] = useState<RatingValueType>(0)
-    let [accordionCollapsed, setAccordionCollapsed] = useState<boolean>(true)
     console.log("App rendering")
     return (
         <div className={'app'}>
-            <Rating value={ratingValue} onClick={setRatingValue}/>
-
-
-            <Accordion titleValue={'Menu'}
-                       collapsed={accordionCollapsed}
-                       changed={() => {
-                           setAccordionCollapsed(!accordionCollapsed)
-                       }}/>
+            <ExampleUseMemo/>
         </div>
     );
 }
