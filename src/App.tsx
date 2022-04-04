@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Rating, RatingValueType} from "./components/Rating/Rating";
 import {Accordion} from "./components/Accordion/Accordion";
-import {ExampleUseMemo} from "./components/Select/UseMemoExample";
+import {ExampleUseMemo} from "./components/Select/UseMemoExample.stories";
 
 function App() {
 

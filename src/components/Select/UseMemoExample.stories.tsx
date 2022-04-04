@@ -14,7 +14,7 @@ export const ExampleUseMemo = () => {
         population: number
     }
 
-    const cities: cityType[] = [
+    const cities: cityType[] = useMemo(()=> [
         {id: 1, title: 'Minsk', country: 'Belarus', population: 2_000_000},
         {id: 2, title: 'Vitebsk', country: 'Belarus', population: 300_000},
         {id: 3, title: 'Moscow', country: 'Russia', population: 12_000_000},
@@ -24,9 +24,11 @@ export const ExampleUseMemo = () => {
         {id: 7, title: 'Novolukoml', country: 'Belarus', population: 15_000},
         {id: 8, title: 'Kazan', country: 'Russia', population: 1_169_000},
         {id: 9, title: 'Lvov', country: 'Ukraine', population: 720_000}
-    ]
+    ],[])
 
-    const [value, setValue] = useState(cities[0].title)
+    const [value, setValue] = useState('')
+
+    const [counter, setCounter] = useState(0)
 
 
     const allCities = useMemo(()=>cities.map(f => <option key={f.id} value={f.id}>{f.title}</option>),[cities])
@@ -44,9 +46,14 @@ export const ExampleUseMemo = () => {
     const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setValue(e.currentTarget.value)
     }
-
+    console.log()
     return (
         <div>
+            <div>
+                {counter}
+                <button onClick={() =>setCounter(counter + 1) }>+</button>
+            </div>
+
             all cities
             <div>
                 <select value={value} onChange={onChange}>
@@ -72,8 +79,5 @@ export const ExampleUseMemo = () => {
                 </select>
             </div>
 
-        </div>
-
-
-    )
+        </div>)
 }
