@@ -29,9 +29,9 @@
 .hour {
     position: absolute;
     width: 10px;
-    height: 60px;
-    background: #3e261e;
-    top: 30%;
+    height: 80px;
+    background: #76160b;
+    top: 23.6%;
     left: 49%;
     transform-origin: bottom;
 }
@@ -40,7 +40,7 @@
     position: absolute;
     width: 6px;
     height: 100px;
-    background: #444;
+    background: green;
     top: 17.5%;
     left: 49%;
     transform-origin: bottom;

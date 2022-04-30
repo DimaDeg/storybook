@@ -41,7 +41,7 @@ export const Example1 = () => {
 
 }
 
-export const SetTimeoutExample = () => {
+export const SetIntervalExample = () => {
 
     const [date, setDate] = useState<Date>()
 
@@ -51,10 +51,10 @@ export const SetTimeoutExample = () => {
             setDate(new Date())
 
         }, 1000)
-        return ()=>{
+        return () => {
             clearInterval(intervalID)
         }
-    },[])
+    }, [])
 
     const time = date?.toLocaleTimeString()
 
@@ -63,5 +63,47 @@ export const SetTimeoutExample = () => {
             {time}
         </div>
     )
+}
 
+export const CaseTrackerExample = () => {
+
+    const [text, setText] = useState('')
+
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => {
+            console.log(e.key)
+            setText(text + e.key)
+        }
+        window.addEventListener('keypress', handler)
+        return () => {
+            window.removeEventListener('keypress', handler)
+        }
+    }, [text])
+    //для сброса эффекта необходимо передавать туже фунцию
+
+
+    return <div>
+        typed:
+        {text}
+    </div>
+}
+
+export const SetTimeoutExample = () => {
+
+
+    const [text, setText] = useState('')
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setText('3 sec later')
+        }, 3000)
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [text])
+
+    return <div>
+        text:
+        {text}
+    </div>
 }

@@ -1,10 +1,18 @@
 import React, {useEffect, useState} from "react";
-import s from './Clock.module.css'
+import {DigitalClock} from "./DigitalClock";
+import {AnalogClock} from "./AnalogClock";
 
+type ClockType = {
+    mode: 'digital' | 'analog'
+}
 
-const getString = (num: number) => num < 10 ? '0' + num : num
+export type ClockViewType = {
+    date: Date
+}
 
-export const Clock = () => {
+export const getString = (num: number) => num < 10 ? '0' + num : num
+
+export const Clock: React.FC<ClockType> = (props) => {
 
     const [date, setDate] = useState(new Date())
 
@@ -18,39 +26,24 @@ export const Clock = () => {
         }
     }, [])
 
+    let view;
 
-    const hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours()
+    switch (props.mode) {
+        case "digital":
+            view = <DigitalClock date={date}/>
+            break
+        case "analog":
+            view = <AnalogClock date={date}/>
+            break
+        default:
+            view = <DigitalClock date={date}/>
+    }
 
-    return (
-        <>
-            <div style={{fontSize: 24}}>
-                <span>{getString(date.getHours())}</span>:
-                <span>{getString(date.getMinutes())}</span>:
-                <span>{getString(date.getSeconds())}</span>
+    return <div>
+            {view}
+        </div>
 
-            </div>
-
-            <div className={s.clock}>
-                <div
-                    className={s.hour}
-                        style={{
-                        transform: `rotateZ(${hours * 30}deg)`
-                    }}
-                />
-                <div
-                    className={s.min}
-                    style={{
-                        transform: `rotateZ(${date.getMinutes() * 6}deg)`
-                    }}
-                />
-                <div
-                    className={s.sec}
-                    style={{
-                        transform: `rotateZ(${date.getSeconds() * 6}deg)`
-                    }}
-                />
-
-            </div>
-        </>
-    )
 }
+
+
+
